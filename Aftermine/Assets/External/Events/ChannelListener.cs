@@ -6,9 +6,19 @@ namespace gamedev.utilities.events
     {
         public T Channel;
 
+        public bool RefreshOnEnable = true;
+
+
+
         private void OnEnable()
         {
             Channel.Event.AddListener(Refresh);
+
+            if (RefreshOnEnable)
+            {
+                Refresh();
+            }
+
         }
 
         private void OnDisable()
