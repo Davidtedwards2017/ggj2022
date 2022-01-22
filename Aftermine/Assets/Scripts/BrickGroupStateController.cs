@@ -44,6 +44,11 @@ public class BrickGroupStateController : MonoBehaviour
         ChangeState(State.Stopped);
     }
 
+    public bool IsStopped()
+    {
+        return Current == Stopped;
+    }
+
     public void ChangeState(State state)
     {
         if (Current != null && Current.State == state) return;

@@ -8,6 +8,8 @@ public class BrickSpawnController : MonoBehaviour
     public GlobalPropertiesSO GlobalProperties;
     public List<SpawnerGroup> SpawnerGroups;
 
+    public Transform BrickContainer;
+
     public List<Spawner> CurretBag;
     public List<Spawner> NextBag;
 
@@ -53,7 +55,7 @@ public class BrickSpawnController : MonoBehaviour
     {
         var spawner = RequestNextSpawner();
         yield return new WaitForSeconds(GlobalProperties.TimeBetweenBrickSpawns);
-        spawner.Spawn(BrickGroupPrefab, BrickType);
+        spawner.Spawn(BrickGroupPrefab, BrickType, BrickContainer);
     }
 
     public Spawner RequestNextSpawner()
