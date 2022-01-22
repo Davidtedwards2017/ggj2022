@@ -14,10 +14,16 @@ public class Brick : MonoBehaviour
 
     public BrickGroup group;
 
-    public void Init(Side side)
+    public BrickType type;
+
+    public BrickTypeEvent OnSetBrickType;
+
+    public void Init(Side side, BrickType type)
     {
         Side = side;
+        this.type = type;
         OnRequestBrickInit?.Invoke(this);
+        OnSetBrickType?.Invoke(this.type);
     }
 
     // Update is called once per frame

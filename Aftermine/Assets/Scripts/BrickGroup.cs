@@ -13,7 +13,7 @@ public class BrickGroup : MonoBehaviour
 
     public BrickGroupStateController stateController;
 
-    public void Init(Side side)
+    public void Init(Side side, BrickType type)
     {
         Side = side;
 
@@ -21,7 +21,7 @@ public class BrickGroup : MonoBehaviour
         foreach (var brick in bricks)
         {
             Add(brick);
-            brick.Init(side);
+            brick.Init(side, type);
         }
 
         stateController.ChangeState(BrickGroupStateController.State.Moving);

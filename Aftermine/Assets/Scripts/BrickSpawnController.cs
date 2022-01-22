@@ -12,6 +12,7 @@ public class BrickSpawnController : MonoBehaviour
     public List<Spawner> NextBag;
 
     public BrickGroup BrickGroupPrefab;
+    public BrickType BrickType;
 
     public bool Spawning = true;
 
@@ -52,7 +53,7 @@ public class BrickSpawnController : MonoBehaviour
     {
         var spawner = RequestNextSpawner();
         yield return new WaitForSeconds(GlobalProperties.TimeBetweenBrickSpawns);
-        spawner.Spawn(BrickGroupPrefab);
+        spawner.Spawn(BrickGroupPrefab, BrickType);
     }
 
     public Spawner RequestNextSpawner()
