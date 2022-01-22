@@ -5,18 +5,19 @@ using UnityEngine;
 public class Brick : MonoBehaviour
 {
     public GlobalPropertiesSO globalProperties;
-
     public Side Side;
-
     public BrickMover mover;
+    public BrickGroup group;
+    public BrickType type;
+    public GridObject gridObject;
 
     public BrickEvent OnRequestBrickInit;
-
-    public BrickGroup group;
-
-    public BrickType type;
-
     public BrickTypeEvent OnSetBrickType;
+
+    public BrickEventChannel BrickCreatedChannel;
+    public BrickEventChannel BrickDestroyedChannel;
+
+    bool beingCleared = false;
 
     public void Init(Side side, BrickType type)
     {
@@ -26,9 +27,29 @@ public class Brick : MonoBehaviour
         OnSetBrickType?.Invoke(this.type);
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool CanBeMatched()
     {
-        
+        return !beingCleared && 
+            group.stateController.IsStopped();
+    }
+
+    public void RequestClearStart()
+    {
+        beingCleared = true;
+    }
+
+    public void RequestClearEnd()
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnEnable()
+    {
+        BrickCreatedChannel.Set(this);
+    }
+
+    private void OnDisable()
+    {
+        BrickDestroyedChannel.Set(this);
     }
 }
