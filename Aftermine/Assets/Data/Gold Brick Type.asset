@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7612fe7e91bbaa4a8f798530e2ecdd3, type: 3}
   m_Name: Gold Brick Type
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 606113a403c1139488cd044c23c9016a, type: 3}
+  sprites:
+  - {fileID: 21300000, guid: 28248e00be683914681af149bb92e7c0, type: 3}
+  - {fileID: 21300000, guid: 48b3a5870cde7c949b03203d047da277, type: 3}
+  - {fileID: 21300000, guid: 671898567052ff9449a1bd00546a08d2, type: 3}
+  - {fileID: 21300000, guid: fa19d62e2bf8c58418c7260334bada1b, type: 3}

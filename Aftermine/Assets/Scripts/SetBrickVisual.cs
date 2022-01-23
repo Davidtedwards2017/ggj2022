@@ -8,6 +8,6 @@ public class SetBrickVisual : MonoBehaviour
 
     public void SetVisual(BrickType type)
     {
-        Renderer.sprite = type.sprite;
+        Renderer.sprite = type.sprites.PickRandom();
     }
 }

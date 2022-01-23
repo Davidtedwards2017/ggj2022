@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "GGJ/Brick Type")]
 public class BrickType : ScriptableObject
 {
-    public Sprite sprite;
+    public List<Sprite> sprites;
 }

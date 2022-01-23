@@ -6,17 +6,13 @@ using UnityEngine.Events;
 [System.Serializable]
 public class CharacterFallingState : ICharacterState
 {
-    public CharacterController controller;
     private CharacterStateController stateController;
 
     public UnityEvent OnEnterState;
     public UnityEvent OnExitState;
 
-    public void Init(
-        CharacterController controller,
-        CharacterStateController stateController)
+    public void Init(CharacterStateController stateController)
     {
-        this.controller = controller;
         this.stateController = stateController;
     }
 

@@ -15,13 +15,22 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Sliding",
+                    "name": "ChangeSide",
                     "type": "Value",
                     "id": "90436f86-0532-4d5a-964b-fa4c8edd4b45",
                     "expectedControlType": "Dpad",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Push",
+                    "type": "Button",
+                    "id": "4a093b1c-97f9-4422-a6dd-d0790eaa6387",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -142,7 +151,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Sliding",
+                    "action": "ChangeSide",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -153,7 +162,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Sliding",
+                    "action": "ChangeSide",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -164,7 +173,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Sliding",
+                    "action": "ChangeSide",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -175,7 +184,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Sliding",
+                    "action": "ChangeSide",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -186,7 +195,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Sliding",
+                    "action": "ChangeSide",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -197,9 +206,20 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Sliding",
+                    "action": "ChangeSide",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "55696580-ef1a-4aa0-b85f-7a1d50e708e0",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Push",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

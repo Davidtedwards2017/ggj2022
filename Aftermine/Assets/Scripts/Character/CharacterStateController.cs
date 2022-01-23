@@ -7,7 +7,8 @@ public enum CharacterState
 {
     Falling,
     Idle,
-    Moving
+    Moving,
+    SwapingSide,
 }
 
 public class CharacterStateController : MonoBehaviour
@@ -20,6 +21,7 @@ public class CharacterStateController : MonoBehaviour
     public CharacterIdleState Idle = new CharacterIdleState();
     public CharacterFallingState Falling = new CharacterFallingState();
     public CharacterMovingState Moving = new CharacterMovingState();
+    public CharacterSwapSideState SwapingSide = new CharacterSwapSideState();
 
     private void Awake()
     {
@@ -28,11 +30,10 @@ public class CharacterStateController : MonoBehaviour
 
     public void Init()
     {
-        Idle.Init(controller, this);
-        Falling.Init(controller, this);
-        Moving.Init(controller, this);
-
-        controller.motor.OnCompletedMovement += GoIdle;
+        Idle.Init(this);
+        Falling.Init(this);
+        Moving.Init(this);
+        SwapingSide.Init(this);
     }
 
     // Update is called once per frame
@@ -57,6 +58,11 @@ public class CharacterStateController : MonoBehaviour
         ChangeState(CharacterState.Moving);
     }
 
+    public void SwapSide()
+    {
+        ChangeState(CharacterState.SwapingSide);
+    }
+
     public void ChangeState(CharacterState state)
     {
         if (Current != null && Current.State == state) return;
@@ -73,6 +79,9 @@ public class CharacterStateController : MonoBehaviour
                 break;
             case CharacterState.Moving:
                 Current = Moving;
+                break;
+            case CharacterState.SwapingSide:
+                Current = SwapingSide;
                 break;
         }
 
