@@ -43,6 +43,7 @@ public class Brick : MonoBehaviour
 
     public void RequestClearEnd()
     {
+        group.Remove(this);
         Destroy(gameObject);
     }
 

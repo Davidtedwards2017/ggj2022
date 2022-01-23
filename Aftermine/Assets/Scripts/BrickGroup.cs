@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BrickGroup : MonoBehaviour
@@ -46,9 +47,13 @@ public class BrickGroup : MonoBehaviour
 
     public void Remove(Brick brick)
     {
+        if (brick != null && Bricks.Contains(brick))
+        {
+            Bricks.Remove(brick);
+        }
 
+        CheckIfShouldDestroy();
     }
-
 
     public void RequestStartSlide(BrickSlidingEventArgs args)
     {
@@ -70,5 +75,11 @@ public class BrickGroup : MonoBehaviour
         OnStopped.Set(this);
     }
 
-    
+    private void CheckIfShouldDestroy()
+    {
+        if (!Bricks.Any())
+        {
+            Destroy(gameObject);
+        }
+    }
 }

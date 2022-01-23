@@ -31,7 +31,6 @@ public class Spawner : MonoBehaviour
     {
         var brickGroup = Instantiate(prefab, transform.position, Quaternion.identity, parent);
         brickGroup.Init(Side, type);
-        
     }
 
 }
