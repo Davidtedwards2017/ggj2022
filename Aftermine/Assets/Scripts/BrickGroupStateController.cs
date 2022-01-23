@@ -93,7 +93,6 @@ public class BrickGroupStateController : MonoBehaviour
         }
 
         Current.OnEnter();
-
     }
 
     private void Update()
