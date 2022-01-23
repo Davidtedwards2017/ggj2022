@@ -39,7 +39,7 @@ public class CharacterController : MonoBehaviour
 
     public void RequestPerformPush()
     {
-
+        stateController.PeformPush();
     }
 
     public void ChangeSide(Side side)
@@ -47,7 +47,6 @@ public class CharacterController : MonoBehaviour
         if (this.side == side) return;
         RequestSwapSide();
     }
-
 
     public void RequestSwapSide()
     {

@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public ColumnSelector columnSelector;
-    public ColumnSlider columnSlider;
     public CharacterController controller;
 
 
