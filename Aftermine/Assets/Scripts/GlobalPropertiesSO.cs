@@ -12,6 +12,7 @@ public class GlobalPropertiesSO : ScriptableObject
 
     public List<BrickType> BrickTypes;
 
+    public Character character;
     public Prefabs prefabs;
 
     public Vector2 GetBrickMovementDirection(Side side)
@@ -23,7 +24,16 @@ public class GlobalPropertiesSO : ScriptableObject
     public class Prefabs 
     {
         public LineClearSequence LineClearSequence;
+    }
 
+    [System.Serializable]
+    public class Character
+    {
+        public float MovementDuration = 0.15f;
+        public float MovementJumpHeight = 1.5f;
+
+        public float FloorPositionOffset = 0.2f;
+        public float BrickPositionOffset = 0.1f;
     }
 
 }

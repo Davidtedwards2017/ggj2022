@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ColumnSelector : MonoBehaviour
 {
-    public Transform Mover;
     public Grid Grid;
 
     public IntEvent OnColumnSelected;
