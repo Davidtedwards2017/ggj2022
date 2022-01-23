@@ -12,6 +12,8 @@ public class Cell : MonoBehaviour
 
     [ReadOnly]
     public float Scale;
+
+    public Side Side;
     
     public void Init(Grid grid, int row, int column)
     {
@@ -26,6 +28,8 @@ public class Cell : MonoBehaviour
 
         transform.localPosition = new Vector2(x, y);
         gameObject.name = string.Format("Cell ({0}, {1})", Row, Column);
+
+        Side = (row < (grid.RowCount) / 2) ? Side.Lower : Side.Upper;
     }
 
     private void OnDrawGizmos()

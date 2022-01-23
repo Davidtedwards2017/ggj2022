@@ -30,6 +30,7 @@ Transform:
   m_Children:
   - {fileID: 344500058719436567}
   - {fileID: 4723069397345244006}
+  - {fileID: 6632956867732908907}
   m_Father: {fileID: 344500057036097556}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -86,6 +87,7 @@ MonoBehaviour:
   Side: 0
   mover: {fileID: 344500058719436564}
   slider: {fileID: 3501124963827393896}
+  groundCheck: {fileID: 7469007808284171384}
   group: {fileID: 0}
   type: {fileID: 0}
   gridObject: {fileID: 4113194760470321908}
@@ -94,6 +96,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 344500058719436564}
         m_TargetAssemblyTypeName: BrickFalling, Assembly-CSharp
+        m_MethodName: Init
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7469007808284171384}
+        m_TargetAssemblyTypeName: BrickGroundCheck, Assembly-CSharp
         m_MethodName: Init
         m_Mode: 0
         m_Arguments:
@@ -139,6 +153,21 @@ MonoBehaviour:
   Row: 0
   Column: 0
   Cell: {fileID: 0}
+  OnUpdateCell:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 344500057036097559}
+        m_TargetAssemblyTypeName: Brick, Assembly-CSharp
+        m_MethodName: UpdateCell
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4762584579055792904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,7 +431,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Brick: {fileID: 344500057036097559}
   Collider: {fileID: 344500058338177129}
-  globalProperties: {fileID: 11400000, guid: dc2a4eb9857416b4988ff5f027aa85b0, type: 2}
   OnRequestStopMovement:
     m_PersistentCalls:
       m_Calls:
@@ -433,7 +461,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  Direction: {x: 0, y: -1}
   Velocity: {x: 0, y: 0}
 --- !u!1 &1089587294995674058
 GameObject:
@@ -520,3 +547,50 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   slideGroup: {fileID: 0}
+--- !u!1 &4540555424730440256
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6632956867732908907}
+  - component: {fileID: 7469007808284171384}
+  m_Layer: 7
+  m_Name: Ground Check
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6632956867732908907
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4540555424730440256}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 344500056973582710}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7469007808284171384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4540555424730440256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4722e508f1a165449f35f9bd226d157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Grounded: 0
+  Collider: {fileID: 344500058338177129}
+  Brick: {fileID: 0}

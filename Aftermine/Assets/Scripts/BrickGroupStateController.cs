@@ -42,6 +42,11 @@ public class BrickGroupStateController : MonoBehaviour
         Sliding = new SlidingState(group);
     }
 
+    public void StartMovement()
+    {
+        ChangeState(State.Moving);
+    }
+
     public void StopMovement()
     {
         ChangeState(State.Stopped);
@@ -162,11 +167,19 @@ public class BrickGroupStateController : MonoBehaviour
 
         public void Update()
         {
-
+            foreach (var brick in group.Bricks)
+            {
+                if (!brick.groundCheck.Grounded)
+                {
+                    group.RequestMovement();
+                    return;
+                }
+            }
         }
 
         public void LateUpdate()
         {
+
         }
     }
 

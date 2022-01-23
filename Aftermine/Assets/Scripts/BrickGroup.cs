@@ -24,7 +24,7 @@ public class BrickGroup : MonoBehaviour
             brick.Init(side, type);
         }
 
-        stateController.ChangeState(BrickGroupStateController.State.Moving);
+        RequestMovement();
     }
 
     private void OnEnable()
@@ -58,6 +58,11 @@ public class BrickGroup : MonoBehaviour
     public void RequestStopSliding()
     {
 
+    }
+
+    public void RequestMovement()
+    {
+        stateController.StartMovement();
     }
 
     public void RequestStop()

@@ -15,7 +15,7 @@ MonoBehaviour:
   BrickSize: {x: 0.95, y: 1}
   GridSnapDistance: 0.7
   BrickFallingSpeed: 5
-  TimeBetweenBrickSpawns: 1
+  TimeBetweenBrickSpawns: 0.2
   prefabs:
     LineClearSequence: {fileID: 7974343660305207133, guid: 6387ad5a6a9e6aa4195899ca98d01217,
       type: 3}

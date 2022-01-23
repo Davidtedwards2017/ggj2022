@@ -8,9 +8,11 @@ public class Brick : MonoBehaviour
     public Side Side;
     public BrickMover mover;
     public BrickSlider slider;
+    public BrickGroundCheck groundCheck;
     public BrickGroup group;
     public BrickType type;
     public GridObject gridObject;
+
 
     public BrickEvent OnRequestBrickInit;
     public BrickTypeEvent OnSetBrickType;
@@ -42,6 +44,11 @@ public class Brick : MonoBehaviour
     public void RequestClearEnd()
     {
         Destroy(gameObject);
+    }
+
+    public void UpdateCell(Cell cell)
+    {
+        Side = cell.Side;
     }
 
     private void OnEnable()
