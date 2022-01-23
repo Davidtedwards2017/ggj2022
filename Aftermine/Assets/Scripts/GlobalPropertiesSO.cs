@@ -9,6 +9,9 @@ public class GlobalPropertiesSO : ScriptableObject
     public float GridSnapDistance = 0.7f;
     public float BrickFallingSpeed = 1;
     public float TimeBetweenBrickSpawns = 1.0f;
+
+    public List<BrickType> BrickTypes;
+
     public Prefabs prefabs;
 
     public Vector2 GetBrickMovementDirection(Side side)

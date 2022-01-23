@@ -1,3 +1,4 @@
+using gamedev.utilities;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,16 +6,21 @@ using UnityEngine;
 
 public class BrickSpawnController : MonoBehaviour
 {
+    public Grid Grid;
     public GlobalPropertiesSO GlobalProperties;
-    public List<SpawnerGroup> SpawnerGroups;
+    public SpawnerGroup UpperSpawnGroup;
+    public SpawnerGroup LowerSpawnGroup;
+    public List<ColumnSpawnerGroup> ColumnSpawnerGroups;
 
     public Transform BrickContainer;
 
-    public List<Spawner> CurretBag;
-    public List<Spawner> NextBag;
+    //public List<Spawner> CurretBag;
+    //public List<Spawner> NextBag;
+
+    public List<ColumnSpawnerGroup> CurretBag;
+    public List<ColumnSpawnerGroup> NextBag;
 
     public BrickGroup BrickGroupPrefab;
-    public List<BrickType> BrickTypes;
 
     public bool Spawning = true;
 
@@ -30,16 +36,38 @@ public class BrickSpawnController : MonoBehaviour
 
     public void Rebuild()
     {
-        foreach (var spawnGroup in SpawnerGroups)
-        {
-            spawnGroup.RebuildSpawners();
-        }
+        UpperSpawnGroup.RebuildSpawners();
+        LowerSpawnGroup.RebuildSpawners();
+
+        CreateColumnSpawningGroups();
     }
 
-    private List<Spawner> GetSpawnersInRandomOrder()
+    public void CreateColumnSpawningGroups()
     {
-        var spawners = SpawnerGroups.SelectMany(sg => sg.Spawners).ToArray();
-        return spawners.OrderBy(x => Random.value).ToList();
+        ColumnSpawnerGroups = new List<ColumnSpawnerGroup>();
+
+        for (int col = 0; col < Grid.ColumnCount; col++)
+        {
+            var upperSpawner = UpperSpawnGroup.Spawners.FirstOrDefault(s => s.Column == col);
+            var lowerSpawner = LowerSpawnGroup.Spawners.FirstOrDefault(s => s.Column == col);
+
+            var colSpawnGroup = new ColumnSpawnerGroup(col, GlobalProperties, upperSpawner, lowerSpawner);
+            ColumnSpawnerGroups.Add(colSpawnGroup);
+        }
+
+    }
+
+    //private List<Spawner> GetSpawnersInRandomOrder()
+    //{
+    //    var spawners = SpawnerGroups.SelectMany(sg => sg.Spawners).ToArray();
+    //    return spawners.OrderBy(x => Random.value).ToList();
+    //}
+
+    private List<ColumnSpawnerGroup> GetColumnSpawnerGroupsInRandomOrder()
+    {
+        var spawners = new List<ColumnSpawnerGroup>(ColumnSpawnerGroups);
+        spawners.Shuffle();
+        return spawners;
     }
 
     private IEnumerator SpawnSequence()
@@ -50,25 +78,75 @@ public class BrickSpawnController : MonoBehaviour
         }
     }
 
+    //public IEnumerator Spawn()
+    //{
+    //    var spawner = RequestNextSpawner();
+    //    yield return new WaitForSeconds(GlobalProperties.TimeBetweenBrickSpawns);
+    //
+    //    if (Spawning)
+    //    {
+    //        spawner.Spawn(BrickGroupPrefab, BrickTypes.PickRandom(), BrickContainer);
+    //    }
+    //}
+
+
+    public Side SpawnSide;
     public IEnumerator Spawn()
     {
-        var spawner = RequestNextSpawner();
+        var spawnerGroup = RequestNextColumnSpawnerGroup();
         yield return new WaitForSeconds(GlobalProperties.TimeBetweenBrickSpawns);
 
         if (Spawning)
         {
-            spawner.Spawn(BrickGroupPrefab, BrickTypes.PickRandom(), BrickContainer);
+            spawnerGroup.SpawnNext(SpawnSide, BrickGroupPrefab, BrickContainer);
+            SwapSpawnSide();
         }
     }
 
-    public Spawner RequestNextSpawner()
+    private void SwapSpawnSide()
     {
-        if (CurretBag == null) CurretBag = new List<Spawner>();
-        if (NextBag == null) NextBag = new List<Spawner>();
+        switch (SpawnSide)
+        {
+            case Side.Lower:
+                SpawnSide = Side.Upper;
+                break;
+            case Side.Upper:
+                SpawnSide = Side.Lower;
+                break;
+        }
+
+    }
+
+    //public Spawner RequestNextSpawner()
+    //{
+    //    if (CurretBag == null) CurretBag = new List<Spawner>();
+    //    if (NextBag == null) NextBag = new List<Spawner>();
+    //
+    //    if (!NextBag.Any())
+    //    {
+    //        NextBag.AddRange(GetSpawnersInRandomOrder());
+    //    }
+    //
+    //    if (!CurretBag.Any())
+    //    {
+    //        CurretBag.AddRange(NextBag);
+    //        NextBag.Clear();
+    //    }
+    //
+    //    var spawner = CurretBag.First();
+    //    CurretBag.Remove(spawner);
+    //
+    //    return spawner;
+    //}
+
+    public ColumnSpawnerGroup RequestNextColumnSpawnerGroup()
+    {
+        if (CurretBag == null) CurretBag = new List<ColumnSpawnerGroup>();
+        if (NextBag == null) NextBag = new List<ColumnSpawnerGroup>();
 
         if (!NextBag.Any())
         {
-            NextBag.AddRange(GetSpawnersInRandomOrder());
+            NextBag.AddRange(GetColumnSpawnerGroupsInRandomOrder());
         }
 
         if (!CurretBag.Any())
@@ -82,4 +160,35 @@ public class BrickSpawnController : MonoBehaviour
 
         return spawner;
     }
+
+    [System.Serializable]
+    public class ColumnSpawnerGroup
+    {
+        private BrickTypeFilteredRandom randomTypePicker;
+        private Spawner upperSpawner;
+        private Spawner lowerSpawner;
+        
+        [ReadOnly]
+        public int Column;
+
+        public ColumnSpawnerGroup(
+            int column, 
+            GlobalPropertiesSO properties, 
+            Spawner upperSpawner, 
+            Spawner lowerSpawner)
+        {
+            Column = column;
+            randomTypePicker = new BrickTypeFilteredRandom(properties.BrickTypes, 2);
+
+            this.upperSpawner = upperSpawner;
+            this.lowerSpawner = lowerSpawner;
+        }
+
+        public void SpawnNext(Side side, BrickGroup prefab, Transform container)
+        {
+            var spawner = side == Side.Upper ? upperSpawner : lowerSpawner;
+            spawner.Spawn(prefab, randomTypePicker.GetNextRandom(), container);
+        }
+    }
+
 }
