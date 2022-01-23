@@ -9,33 +9,38 @@ public class BrickMover : MonoBehaviour
 {
     public Brick Brick;
     public Collider2D Collider;
-    public GlobalPropertiesSO globalProperties;
+    public GlobalPropertiesSO globalProperties => Brick.globalProperties;
+    public Side Side => Brick.Side;
 
     public UnityEvent OnRequestStopMovement;
     public BrickEvent OnStopMovement;
 
-    [ReadOnly]
-    public Vector2 Direction;
     [ReadOnly]
     public Vector2 Velocity;
 
     public void Init(Brick brick)
     {
         Brick = brick;
-        Direction = globalProperties.GetBrickMovementDirection(brick.Side);
     }
 
     public void UpdateMovement()
     {
-        Velocity = Direction.normalized * globalProperties.BrickFallingSpeed * Time.deltaTime;
+        var direction = globalProperties.GetBrickMovementDirection(Side);
+
+        Velocity = direction.normalized * globalProperties.BrickFallingSpeed * Time.deltaTime;
         Brick.transform.Translate(Velocity);
-        Trace();
+        Trace(direction);
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;
-        Gizmos.DrawRay(Brick.transform.position, Velocity);
+
+        var direction = globalProperties.GetBrickMovementDirection(Side);
+        var origin = Brick.transform.position +
+            (new Vector3(direction.x, direction.y, 0) * (globalProperties.BrickSize.y / 2));
+
+        Gizmos.DrawRay(origin, direction * 0.2f);
     }
 
     public void StopMovement()
@@ -44,14 +49,15 @@ public class BrickMover : MonoBehaviour
         OnStopMovement?.Invoke(Brick);
     }
 
-    private void Trace()
+    private void Trace(Vector2 direction)
     {
-        RaycastHit2D[] hits = Physics2D.BoxCastAll(
-            Brick.transform.position, 
-            globalProperties.BrickSize, 
-            0, 
-            Direction, 
-            0.01f);
+        var origin = Brick.transform.position + 
+            (new Vector3(direction.x, direction.y, 0) * (globalProperties.BrickSize.y / 2));
+
+        RaycastHit2D[] hits = Physics2D.RaycastAll(
+            origin, 
+            direction, 
+            0.2f);
 
         var ignoreColliders = Brick.group.Bricks.Select(b => b.mover.Collider).ToList();
 

@@ -14,6 +14,8 @@ public class GridObject : MonoBehaviour
     [ReadOnly]
     public Cell Cell;
 
+    public CellEvent OnUpdateCell;
+
     public void SetGrid(Grid grid)
     {
         Grid = grid;
@@ -36,6 +38,8 @@ public class GridObject : MonoBehaviour
             Cell = _Cell;
             Row = Cell.Row;
             Column = Cell.Column;
+
+            OnUpdateCell?.Invoke(Cell);
         }
     }
 
