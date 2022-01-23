@@ -30,4 +30,19 @@ public class BrickCollection : MonoBehaviour
             Bricks.Remove(brick);
         }
     }
+
+    public List<Brick> GetBricksInColumn(int column)
+    {
+        var columnBricks = new List<Brick>();
+
+        foreach (var brick in Bricks)
+        {
+            if (brick.AtRest() && brick.gridObject.Column == column)
+            {
+                columnBricks.Add(brick);
+            }
+        }
+
+        return columnBricks;
+    }
 }

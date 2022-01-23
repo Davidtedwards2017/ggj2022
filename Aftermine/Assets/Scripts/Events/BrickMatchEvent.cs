@@ -14,5 +14,6 @@ public class BrickMatchArgs
 {
     public int Row;
     public List<Brick> Bricks;
+    public BrickType Type;
 }
 

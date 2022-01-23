@@ -9,6 +9,7 @@ public class BrickGroupStateController : MonoBehaviour
     {
         Moving,
         Stopped,
+        Sliding
     }
 
     public interface IState
@@ -27,6 +28,7 @@ public class BrickGroupStateController : MonoBehaviour
 
     private MovingState Moving;
     private StoppedState Stopped;
+    private SlidingState Sliding;
 
     private void Awake()
     {
@@ -37,6 +39,7 @@ public class BrickGroupStateController : MonoBehaviour
     {
         Moving = new MovingState(group);
         Stopped = new StoppedState(group);
+        Sliding = new SlidingState(group);
     }
 
     public void StopMovement()
@@ -44,9 +47,25 @@ public class BrickGroupStateController : MonoBehaviour
         ChangeState(State.Stopped);
     }
 
+    public void StartSliding(BrickSlidingEventArgs slidingArgs)
+    {
+        Sliding.slidingArgs = slidingArgs;
+        ChangeState(State.Sliding);
+    }
+
     public bool IsStopped()
     {
         return Current == Stopped;
+    }
+
+    public bool IsSliding()
+    {
+        return Current == Sliding;
+    }
+
+    public bool IsMoving()
+    {
+        return Current == Moving;
     }
 
     public void ChangeState(State state)
@@ -62,6 +81,9 @@ public class BrickGroupStateController : MonoBehaviour
                 break;
             case State.Stopped:
                 Current = Stopped;
+                break;
+            case State.Sliding:
+                Current = Sliding;
                 break;
         }
 
@@ -145,6 +167,51 @@ public class BrickGroupStateController : MonoBehaviour
 
         public void LateUpdate()
         {
+        }
+    }
+
+    public class SlidingState : IState
+    {
+        public State State { get { return State.Sliding; } }
+        private BrickGroup group;
+
+        public BrickSlidingEventArgs slidingArgs;
+
+        public SlidingState(BrickGroup group)
+        {
+            this.group = group;
+        }
+
+        public void OnEnter()
+        {
+            Debug.Log(group + " Entered state: Sliding");
+
+            var slidingGroup = slidingArgs.SlideGroup;
+            foreach (var brick in group.Bricks)
+            {
+                brick.slider.StartSliding(slidingGroup);
+            }
+        }
+
+        public void OnExit()
+        {
+            foreach (var brick in group.Bricks)
+            {
+                brick.slider.StopSlide();
+            }
+        }
+
+        public void Update()
+        {
+
+        }
+
+        public void LateUpdate()
+        {
+            foreach (var brick in group.Bricks)
+            {
+                brick.slider.UpdateMovement();
+            }
         }
     }
 }

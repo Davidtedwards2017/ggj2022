@@ -172,6 +172,11 @@ PrefabInstance:
       propertyPath: OnStopMovement.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
       value: UnityEngine.Rigidbody2D, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3501124963827393896, guid: 926402545d98bb544965829197bcdd1c,
+        type: 3}
+      propertyPath: OnRequestStopSlide.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 707079775232100853}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 926402545d98bb544965829197bcdd1c, type: 3}
 --- !u!114 &1692377884310414353 stripped
