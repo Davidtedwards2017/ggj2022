@@ -1,10 +1,11 @@
+using gamedev.utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class CharacterIdleState : ICharacterState
+public class CharacterSwapSideState : ICharacterState
 {
     private CharacterStateController stateController;
 
@@ -16,7 +17,7 @@ public class CharacterIdleState : ICharacterState
         this.stateController = stateController;
     }
 
-    public CharacterState State => CharacterState.Idle;
+    public CharacterState State => CharacterState.SwapingSide;
 
     public void Update()
     {
@@ -30,6 +31,8 @@ public class CharacterIdleState : ICharacterState
     public void OnEnter()
     {
         OnEnterState?.Invoke();
+        stateController.controller.SideSwap.SwapSide();
+        stateController.RequestMove(stateController.controller.Column);
     }
 
     public void OnExit()

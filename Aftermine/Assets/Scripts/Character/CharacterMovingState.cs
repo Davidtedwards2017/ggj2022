@@ -7,17 +7,13 @@ using UnityEngine.Events;
 [System.Serializable]
 public class CharacterMovingState : ICharacterState
 {
-    private CharacterController controller;
     private CharacterStateController stateController;
 
     public UnityEvent OnEnterState;
     public UnityEvent OnExitState;
 
-    public void Init(
-        CharacterController controller, 
-        CharacterStateController stateController)
+    public void Init(CharacterStateController stateController)
     {
-        this.controller = controller;
         this.stateController = stateController;
     }
 
@@ -39,7 +35,7 @@ public class CharacterMovingState : ICharacterState
     {
         OnEnterState?.Invoke();
 
-        controller.motor.PerformMove(TargetColumn);    
+        stateController.controller.motor.PerformMove(TargetColumn);    
     }
 
     public void OnExit()

@@ -11,7 +11,7 @@ public class CharacterMotor : MonoBehaviour
     public Transform root;
     public CharacterController controller;
 
-    public Action OnCompletedMovement;
+    public IntEvent OnCompletedMovement;
 
     private GlobalPropertiesSO.Character characterProperties => controller.globalProperties.character;
 
@@ -48,15 +48,19 @@ public class CharacterMotor : MonoBehaviour
         var grid = controller.gridObject.Grid;
 
         var x = grid.GetXPosition(column);
-
+        var jump = JumpHeight;
         var offset = controller.globalProperties.BrickSize.x + BrickOffset;
-        if (side == Side.Lower) offset *= -1;
+        if (side == Side.Lower)
+        {
+            offset *= -1;
+            jump *= -1;
+        }
 
         var y = brick.transform.position.y + offset;
 
         var destination = new Vector2(x, y);
 
-        root.transform.DOJump(destination, JumpHeight, 1, MoveDuration)
+        root.transform.DOJump(destination, jump, 1, MoveDuration)
             .OnComplete(CompletedMovement);
     }
 
@@ -65,19 +69,24 @@ public class CharacterMotor : MonoBehaviour
         var grid = controller.gridObject.Grid;
 
         var x = grid.GetXPosition(column);
-
+        var jump = JumpHeight;
         var offset = FloorOffset;
-        if (side == Side.Lower) offset *= -1;
+        if (side == Side.Lower)
+        {
+            offset *= -1;
+            jump *= -1;
+        }
+
         var y = grid.transform.position.y + offset;
 
         var destination = new Vector2(x, y);
-        root.transform.DOJump(destination, JumpHeight, 1, MoveDuration)
+        root.transform.DOJump(destination, jump, 1, MoveDuration)
             .OnComplete(CompletedMovement);
     }
 
     private void CompletedMovement()
     {
-        OnCompletedMovement?.Invoke();
+        OnCompletedMovement?.Invoke(column);
     }
 
     private Brick TraceForBrick(Vector2 direction)
