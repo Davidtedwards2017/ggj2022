@@ -7,6 +7,7 @@ public class Brick : MonoBehaviour
     public GlobalPropertiesSO globalProperties;
     public Side Side;
     public BrickMover mover;
+    public BrickSlider slider;
     public BrickGroup group;
     public BrickType type;
     public GridObject gridObject;
@@ -27,7 +28,7 @@ public class Brick : MonoBehaviour
         OnSetBrickType?.Invoke(this.type);
     }
 
-    public bool CanBeMatched()
+    public bool AtRest()
     {
         return !beingCleared && 
             group.stateController.IsStopped();

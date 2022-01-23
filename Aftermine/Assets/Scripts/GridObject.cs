@@ -35,7 +35,7 @@ public class GridObject : MonoBehaviour
         {
             Cell = _Cell;
             Row = Cell.Row;
-            Column = Cell.Row;
+            Column = Cell.Column;
         }
     }
 

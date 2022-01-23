@@ -29,6 +29,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 344500058719436567}
+  - {fileID: 4723069397345244006}
   m_Father: {fileID: 344500057036097556}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -84,6 +85,7 @@ MonoBehaviour:
   globalProperties: {fileID: 11400000, guid: dc2a4eb9857416b4988ff5f027aa85b0, type: 2}
   Side: 0
   mover: {fileID: 344500058719436564}
+  slider: {fileID: 3501124963827393896}
   group: {fileID: 0}
   type: {fileID: 0}
   gridObject: {fileID: 4113194760470321908}
@@ -433,3 +435,88 @@ MonoBehaviour:
         m_CallState: 2
   Direction: {x: 0, y: -1}
   Velocity: {x: 0, y: 0}
+--- !u!1 &1089587294995674058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4723069397345244006}
+  - component: {fileID: 3501124963827393896}
+  m_Layer: 7
+  m_Name: Slider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4723069397345244006
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089587294995674058}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 344500056973582710}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3501124963827393896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089587294995674058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7bf36ec31447014d904b9fa19fcd770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Brick: {fileID: 344500057036097559}
+  globalProperties: {fileID: 11400000, guid: dc2a4eb9857416b4988ff5f027aa85b0, type: 2}
+  Collider: {fileID: 344500058338177129}
+  Direction: {x: 0, y: 0}
+  Velocity: {x: 0, y: 0}
+  Distance: 0
+  Speed: 0
+  OnCollisionWithFallingBrick:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRequestStopSlide:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: BrickGroupStateController, Assembly-CSharp
+        m_MethodName: StopMovement
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnStopSlide:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4113194760470321908}
+        m_TargetAssemblyTypeName: GridObject, Assembly-CSharp
+        m_MethodName: SnapToGrid
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  slideGroup: {fileID: 0}

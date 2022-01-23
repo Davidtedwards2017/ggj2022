@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MatchChecker : MonoBehaviour
@@ -25,7 +26,15 @@ public class MatchChecker : MonoBehaviour
 
             if (bricks.Count >= Grid.ColumnCount)
             {
-                DetectedMatch(row, bricks);
+                var brickTypesInRow = bricks
+                    .Select(b => b.type)
+                    .Distinct()
+                    .ToList();
+
+                if (brickTypesInRow.Count == 1)
+                {
+                    DetectedMatch(row, bricks, brickTypesInRow[0]);
+                }
             }
         }
     }
@@ -59,17 +68,18 @@ public class MatchChecker : MonoBehaviour
 
     private bool IsValid(Brick brick)
     {
-        return brick.CanBeMatched();
+        return brick.AtRest();
     }
 
 
-    private void DetectedMatch(int row, List<Brick> bricks)
+    private void DetectedMatch(int row, List<Brick> bricks, BrickType type)
     {
         OnBrickMatchDetected?.Invoke(
             new BrickMatchArgs()
             {
                 Row = row,
-                Bricks = new List<Brick>(bricks)
+                Bricks = new List<Brick>(bricks),
+                Type = type
             }
         );
     }

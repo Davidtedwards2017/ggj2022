@@ -47,8 +47,18 @@ public class BrickGroup : MonoBehaviour
     public void Remove(Brick brick)
     {
 
-    } 
+    }
 
+
+    public void RequestStartSlide(BrickSlidingEventArgs args)
+    {
+        stateController.StartSliding(args);
+    }
+
+    public void RequestStopSliding()
+    {
+
+    }
 
     public void RequestStop()
     {
