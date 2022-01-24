@@ -10,7 +10,6 @@ public class CharacterFalling : MonoBehaviour
     public CharacterController controller;
     public GlobalPropertiesSO globalProperties => controller.globalProperties;
 
-
     public UnityEvent OnRequestStopMovement;
     public BrickEvent OnStopMovement;
 

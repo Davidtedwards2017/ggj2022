@@ -29,9 +29,14 @@ public class BrickSpawnController : MonoBehaviour
         Rebuild();
     }
 
-    private void Start()
+    public void StartSpawning()
     {
         StartCoroutine(SpawnSequence());
+    }
+
+    public void StopSpawning()
+    {
+        StopAllCoroutines();
     }
 
     public void Rebuild()

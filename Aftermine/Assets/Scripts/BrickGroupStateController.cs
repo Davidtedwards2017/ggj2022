@@ -119,7 +119,6 @@ public class BrickGroupStateController : MonoBehaviour
 
         public void OnEnter()
         {
-            Debug.Log(group + " Entered state: Moving");
         }
 
         public void OnExit()
@@ -157,7 +156,6 @@ public class BrickGroupStateController : MonoBehaviour
 
         public void OnEnter()
         {
-            Debug.Log(group + " Entered state: Stopped");
         }
 
         public void OnExit()
