@@ -8,6 +8,8 @@ public class CharacterFallingState : ICharacterState
 {
     private CharacterStateController stateController;
 
+    public CharacterFalling Falling;
+
     public UnityEvent OnEnterState;
     public UnityEvent OnExitState;
 
@@ -25,6 +27,7 @@ public class CharacterFallingState : ICharacterState
 
     public void LateUpdate()
     {
+        Falling.UpdateMovement();
     }
 
     public void OnEnter()

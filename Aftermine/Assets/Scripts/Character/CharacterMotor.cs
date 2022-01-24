@@ -42,7 +42,6 @@ public class CharacterMotor : MonoBehaviour
         }
     }
 
-
     private void MoveOnAboveBrick(Brick brick)
     {
         var grid = controller.gridObject.Grid;

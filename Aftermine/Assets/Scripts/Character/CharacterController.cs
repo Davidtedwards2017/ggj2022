@@ -11,6 +11,7 @@ public class CharacterController : MonoBehaviour
     public CharacterMotor motor;
     public SideSwap SideSwap;
     public GridObject gridObject;
+    public CharacterGroundCheck groundCheck;
     public int Column => gridObject.Column;
 
     [ReadOnly]

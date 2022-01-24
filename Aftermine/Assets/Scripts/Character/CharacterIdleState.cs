@@ -20,7 +20,10 @@ public class CharacterIdleState : ICharacterState
 
     public void Update()
     {
-
+        if (!stateController.controller.groundCheck.Grounded)
+        {
+            stateController.StartFalling();
+        }
     }
 
     public void LateUpdate()

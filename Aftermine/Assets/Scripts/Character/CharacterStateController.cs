@@ -79,6 +79,11 @@ public class CharacterStateController : MonoBehaviour
         ChangeState(CharacterState.Squish);
     }
 
+    public void StartFalling()
+    {
+        ChangeState(CharacterState.Falling);
+    }
+
     public void ChangeState(CharacterState state)
     {
         if (Current != null && Current.State == state) return;

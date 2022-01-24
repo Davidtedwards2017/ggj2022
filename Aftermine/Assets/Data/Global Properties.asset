@@ -19,6 +19,12 @@ MonoBehaviour:
   BrickTypes:
   - {fileID: 11400000, guid: 57d3e78e509b6ba4abd0ec97d3a3d8af, type: 2}
   - {fileID: 11400000, guid: fda47761a8871bd4a9e743b9612c02c2, type: 2}
+  character:
+    MovementDuration: 0.15
+    MovementJumpHeight: 1.5
+    FloorPositionOffset: 0.2
+    BrickPositionOffset: 0.1
+    FallSpeed: 10
   prefabs:
     LineClearSequence: {fileID: 7974343660305207133, guid: 6387ad5a6a9e6aa4195899ca98d01217,
       type: 3}
