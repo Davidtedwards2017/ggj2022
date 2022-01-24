@@ -10,6 +10,7 @@ public enum CharacterState
     Moving,
     SwapingSide,
     Pushing,
+    Squish,
 }
 
 public class CharacterStateController : MonoBehaviour
@@ -24,6 +25,7 @@ public class CharacterStateController : MonoBehaviour
     public CharacterMovingState Moving = new CharacterMovingState();
     public CharacterSwapSideState SwapingSide = new CharacterSwapSideState();
     public CharacterPushingState Pushing = new CharacterPushingState();
+    public CharacterSquishState Squish = new CharacterSquishState();
 
     private void Awake()
     {
@@ -37,6 +39,7 @@ public class CharacterStateController : MonoBehaviour
         Moving.Init(this);
         SwapingSide.Init(this);
         Pushing.Init(this);
+        Squish.Init(this);
     }
 
     // Update is called once per frame
@@ -71,6 +74,11 @@ public class CharacterStateController : MonoBehaviour
         ChangeState(CharacterState.Pushing);
     }
 
+    public void GetSquished()
+    {
+        ChangeState(CharacterState.Squish);
+    }
+
     public void ChangeState(CharacterState state)
     {
         if (Current != null && Current.State == state) return;
@@ -93,6 +101,9 @@ public class CharacterStateController : MonoBehaviour
                 break;
             case CharacterState.Pushing:
                 Current = Pushing;
+                break;
+            case CharacterState.Squish:
+                Current = Squish;
                 break;
         }
 

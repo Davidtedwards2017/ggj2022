@@ -4,22 +4,19 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class CharacterPushingState : ICharacterState
+public class CharacterSquishState : ICharacterState
 {
     private CharacterStateController stateController;
 
     public UnityEvent OnEnterState;
     public UnityEvent OnExitState;
 
-    public UnityEvent OnUpperPush;
-    public UnityEvent OnLowerPush;
-
     public void Init(CharacterStateController stateController)
     {
         this.stateController = stateController;
     }
 
-    public CharacterState State => CharacterState.Pushing;
+    public CharacterState State => CharacterState.Squish;
 
     public void Update()
     {
@@ -33,17 +30,6 @@ public class CharacterPushingState : ICharacterState
     public void OnEnter()
     {
         OnEnterState?.Invoke();
-
-        var fromSide = stateController.controller.side;
-        switch (fromSide) 
-        {
-            case Side.Upper:
-                OnUpperPush?.Invoke();
-                break;
-            case Side.Lower:
-                OnLowerPush?.Invoke();
-                break;
-        }
     }
 
     public void OnExit()

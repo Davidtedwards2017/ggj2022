@@ -58,6 +58,8 @@ public class PlayerController : MonoBehaviour
 
     public void ChangeSideInput(InputAction.CallbackContext value)
     {
+        return;
+
         if (!EnableInput) return;
         if (!value.performed) return;
 

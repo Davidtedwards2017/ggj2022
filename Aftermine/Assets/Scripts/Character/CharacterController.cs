@@ -53,6 +53,11 @@ public class CharacterController : MonoBehaviour
         stateController.SwapSide();
     }
 
+    public void RequestSquish()
+    {
+        stateController.GetSquished();
+    }
+
     public void SetSide(Side side)
     {
         this.side = side;
