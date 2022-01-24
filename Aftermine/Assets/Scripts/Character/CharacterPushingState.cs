@@ -4,21 +4,22 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class CharacterFallingState : ICharacterState
+public class CharacterPushingState : ICharacterState
 {
     private CharacterStateController stateController;
 
-    public CharacterFalling Falling;
-
     public UnityEvent OnEnterState;
     public UnityEvent OnExitState;
+
+    public UnityEvent OnUpperPush;
+    public UnityEvent OnLowerPush;
 
     public void Init(CharacterStateController stateController)
     {
         this.stateController = stateController;
     }
 
-    public CharacterState State => CharacterState.Falling;
+    public CharacterState State => CharacterState.Pushing;
 
     public void Update()
     {
@@ -27,12 +28,22 @@ public class CharacterFallingState : ICharacterState
 
     public void LateUpdate()
     {
-        Falling.UpdateMovement();
     }
 
     public void OnEnter()
     {
         OnEnterState?.Invoke();
+
+        var fromSide = stateController.controller.side;
+        switch (fromSide) 
+        {
+            case Side.Upper:
+                OnUpperPush?.Invoke();
+                break;
+            case Side.Lower:
+                OnLowerPush?.Invoke();
+                break;
+        }
     }
 
     public void OnExit()

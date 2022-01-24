@@ -8,7 +8,6 @@ using UnityEngine.Events;
 public class BrickMover : MonoBehaviour
 {
     public Brick Brick;
-    public Collider2D Collider;
     public GlobalPropertiesSO globalProperties => Brick.globalProperties;
     public Side Side => Brick.Side;
 
@@ -59,14 +58,26 @@ public class BrickMover : MonoBehaviour
             direction, 
             0.2f);
 
-        var ignoreColliders = Brick.group.Bricks.Select(b => b.mover.Collider).ToList();
-
         foreach (var hit in hits)
         {
-            if (hit.collider != null && !ignoreColliders.Contains(hit.collider))
+            if (hit.collider == null) continue;
+            Brick brick = hit.collider.GetComponentInParent<Brick>();
+            if (brick != null)
             {
                 OnRequestStopMovement?.Invoke();
                 return;
+            }
+
+            CharacterController character = hit.collider.GetComponentInParent<CharacterController>();
+            if (character != null && character.side == Side)
+            {
+                character.RequestSquish();
+            }
+
+            
+            if (hit.collider.tag == "Floor")
+            {
+                OnRequestStopMovement?.Invoke();
             }
         }
     }

@@ -12,11 +12,6 @@ public class ColumnSelector : MonoBehaviour
     [ReadOnly]
     public int Column;
     
-    void Awake()
-    {
-        Init(Grid.ColumnCount / 2);
-    }
-
     public void Init(int column)
     {
         this.Column = column;

@@ -34,6 +34,8 @@ public class GlobalPropertiesSO : ScriptableObject
 
         public float FloorPositionOffset = 0.2f;
         public float BrickPositionOffset = 0.1f;
+
+        public float FallSpeed = 1f;
     }
 
 }

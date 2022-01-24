@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ColumnSlider : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class ColumnSlider : MonoBehaviour
 
     public SlideGroup SlidingGroupPrefab;
 
+    public UnityEvent OnSuccess;
+    public UnityEvent OnFailed;
+
     public void SelectColumn(int column)
     {
         Column = column;
@@ -21,13 +25,11 @@ public class ColumnSlider : MonoBehaviour
     
     public void RequestSlideUp(int spaces = 1)
     {
-        Debug.Log(string.Format("Requesting Slide Up column:{0} spaces:{1}", Column, spaces));
         SpawnSlidingGroup(Column, Side.Lower, spaces);
     }
 
     public void RequestSlideDown(int spaces = 1)
     {
-        Debug.Log(string.Format("Requesting Slide Down column:{0} spaces:{1}", Column, spaces));
         SpawnSlidingGroup(Column, Side.Upper, spaces);
     }
 
@@ -37,7 +39,18 @@ public class ColumnSlider : MonoBehaviour
             .Select(b => b.group)
             .ToList();
 
-        var slidingGroup = Instantiate(SlidingGroupPrefab);
-        slidingGroup.Init(column, brickGroups, fromSide, spaces);
+        bool canSlideFromSide = brickGroups.SelectMany(group => group.Bricks).Any(b => b.Side == fromSide);
+
+        if (canSlideFromSide)
+        {
+            var slidingGroup = Instantiate(SlidingGroupPrefab);
+            slidingGroup.Init(column, brickGroups, fromSide, spaces);
+            OnSuccess?.Invoke();
+        }
+        else
+        {
+            OnFailed?.Invoke();
+        }
+
     }
 }

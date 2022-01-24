@@ -4,11 +4,9 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class CharacterFallingState : ICharacterState
+public class CharacterSquishState : ICharacterState
 {
     private CharacterStateController stateController;
-
-    public CharacterFalling Falling;
 
     public UnityEvent OnEnterState;
     public UnityEvent OnExitState;
@@ -18,7 +16,7 @@ public class CharacterFallingState : ICharacterState
         this.stateController = stateController;
     }
 
-    public CharacterState State => CharacterState.Falling;
+    public CharacterState State => CharacterState.Squish;
 
     public void Update()
     {
@@ -27,7 +25,6 @@ public class CharacterFallingState : ICharacterState
 
     public void LateUpdate()
     {
-        Falling.UpdateMovement();
     }
 
     public void OnEnter()

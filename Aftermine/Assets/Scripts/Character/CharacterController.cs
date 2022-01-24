@@ -11,6 +11,7 @@ public class CharacterController : MonoBehaviour
     public CharacterMotor motor;
     public SideSwap SideSwap;
     public GridObject gridObject;
+    public CharacterGroundCheck groundCheck;
     public int Column => gridObject.Column;
 
     [ReadOnly]
@@ -39,7 +40,7 @@ public class CharacterController : MonoBehaviour
 
     public void RequestPerformPush()
     {
-
+        stateController.PeformPush();
     }
 
     public void ChangeSide(Side side)
@@ -48,10 +49,14 @@ public class CharacterController : MonoBehaviour
         RequestSwapSide();
     }
 
-
     public void RequestSwapSide()
     {
         stateController.SwapSide();
+    }
+
+    public void RequestSquish()
+    {
+        stateController.GetSquished();
     }
 
     public void SetSide(Side side)
