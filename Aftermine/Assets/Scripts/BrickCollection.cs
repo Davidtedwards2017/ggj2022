@@ -45,4 +45,12 @@ public class BrickCollection : MonoBehaviour
 
         return columnBricks;
     }
+
+    public void ClearBricks()
+    {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
 }
