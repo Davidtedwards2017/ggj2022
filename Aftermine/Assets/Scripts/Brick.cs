@@ -12,6 +12,7 @@ public class Brick : MonoBehaviour
     public BrickGroup group;
     public BrickType type;
     public GridObject gridObject;
+    public BrickJiggle Jiggle;
 
 
     public BrickEvent OnRequestBrickInit;
@@ -22,12 +23,16 @@ public class Brick : MonoBehaviour
 
     bool beingCleared = false;
 
+    public SideEvent OnInitFromSide;
+
     public void Init(Side side, BrickType type)
     {
         Side = side;
         this.type = type;
         OnRequestBrickInit?.Invoke(this);
         OnSetBrickType?.Invoke(this.type);
+
+        OnInitFromSide?.Invoke(side);
     }
 
     public bool AtRest()
