@@ -13,9 +13,7 @@ public class BrickSpawnController : MonoBehaviour
     public List<ColumnSpawnerGroup> ColumnSpawnerGroups;
 
     public Transform BrickContainer;
-
-    //public List<Spawner> CurretBag;
-    //public List<Spawner> NextBag;
+    public Side SpawnSide;
 
     public List<ColumnSpawnerGroup> CurretBag;
     public List<ColumnSpawnerGroup> NextBag;
@@ -59,14 +57,7 @@ public class BrickSpawnController : MonoBehaviour
             var colSpawnGroup = new ColumnSpawnerGroup(col, GlobalProperties, upperSpawner, lowerSpawner);
             ColumnSpawnerGroups.Add(colSpawnGroup);
         }
-
     }
-
-    //private List<Spawner> GetSpawnersInRandomOrder()
-    //{
-    //    var spawners = SpawnerGroups.SelectMany(sg => sg.Spawners).ToArray();
-    //    return spawners.OrderBy(x => Random.value).ToList();
-    //}
 
     private List<ColumnSpawnerGroup> GetColumnSpawnerGroupsInRandomOrder()
     {
@@ -83,19 +74,6 @@ public class BrickSpawnController : MonoBehaviour
         }
     }
 
-    //public IEnumerator Spawn()
-    //{
-    //    var spawner = RequestNextSpawner();
-    //    yield return new WaitForSeconds(GlobalProperties.TimeBetweenBrickSpawns);
-    //
-    //    if (Spawning)
-    //    {
-    //        spawner.Spawn(BrickGroupPrefab, BrickTypes.PickRandom(), BrickContainer);
-    //    }
-    //}
-
-
-    public Side SpawnSide;
     public IEnumerator Spawn()
     {
         var spawnerGroup = RequestNextColumnSpawnerGroup();
@@ -121,28 +99,6 @@ public class BrickSpawnController : MonoBehaviour
         }
 
     }
-
-    //public Spawner RequestNextSpawner()
-    //{
-    //    if (CurretBag == null) CurretBag = new List<Spawner>();
-    //    if (NextBag == null) NextBag = new List<Spawner>();
-    //
-    //    if (!NextBag.Any())
-    //    {
-    //        NextBag.AddRange(GetSpawnersInRandomOrder());
-    //    }
-    //
-    //    if (!CurretBag.Any())
-    //    {
-    //        CurretBag.AddRange(NextBag);
-    //        NextBag.Clear();
-    //    }
-    //
-    //    var spawner = CurretBag.First();
-    //    CurretBag.Remove(spawner);
-    //
-    //    return spawner;
-    //}
 
     public ColumnSpawnerGroup RequestNextColumnSpawnerGroup()
     {

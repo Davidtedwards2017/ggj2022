@@ -25,7 +25,7 @@ public class BrickGroup : MonoBehaviour
             brick.Init(side, type);
         }
 
-        RequestMovement();
+        stateController.ChangeState(BrickGroupStateController.State.Jiggle);
     }
 
     private void OnEnable()

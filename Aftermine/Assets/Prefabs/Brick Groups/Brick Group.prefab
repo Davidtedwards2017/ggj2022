@@ -65,6 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   group: {fileID: 2165268497670890293}
+  globalProperties: {fileID: 11400000, guid: dc2a4eb9857416b4988ff5f027aa85b0, type: 2}
 --- !u!1001 &3344354211068935909
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -134,44 +135,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 344500058719436564, guid: 926402545d98bb544965829197bcdd1c,
         type: 3}
-      propertyPath: OnStopMovement.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 344500058719436564, guid: 926402545d98bb544965829197bcdd1c,
-        type: 3}
-      propertyPath: OnStopMovement.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1692377884310414353}
-    - target: {fileID: 344500058719436564, guid: 926402545d98bb544965829197bcdd1c,
-        type: 3}
-      propertyPath: OnStopMovement.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 344500058719436564, guid: 926402545d98bb544965829197bcdd1c,
-        type: 3}
-      propertyPath: OnStopMovement.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SnapToGrid
-      objectReference: {fileID: 0}
-    - target: {fileID: 344500058719436564, guid: 926402545d98bb544965829197bcdd1c,
-        type: 3}
-      propertyPath: OnStopMovement.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: Sleep
-      objectReference: {fileID: 0}
-    - target: {fileID: 344500058719436564, guid: 926402545d98bb544965829197bcdd1c,
-        type: 3}
       propertyPath: OnRequestStopMovement.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 707079775232100853}
-    - target: {fileID: 344500058719436564, guid: 926402545d98bb544965829197bcdd1c,
-        type: 3}
-      propertyPath: OnStopMovement.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: GridObject, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 344500058719436564, guid: 926402545d98bb544965829197bcdd1c,
-        type: 3}
-      propertyPath: OnStopMovement.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: UnityEngine.Rigidbody2D, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 3501124963827393896, guid: 926402545d98bb544965829197bcdd1c,
         type: 3}
       propertyPath: OnRequestStopSlide.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -179,18 +145,6 @@ PrefabInstance:
       objectReference: {fileID: 707079775232100853}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 926402545d98bb544965829197bcdd1c, type: 3}
---- !u!114 &1692377884310414353 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4113194760470321908, guid: 926402545d98bb544965829197bcdd1c,
-    type: 3}
-  m_PrefabInstance: {fileID: 3344354211068935909}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 113ad11c90c921c46b991f14c7322055, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &3075501791113475825 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 344500057036097556, guid: 926402545d98bb544965829197bcdd1c,

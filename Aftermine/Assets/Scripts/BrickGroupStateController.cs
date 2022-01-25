@@ -7,6 +7,7 @@ public class BrickGroupStateController : MonoBehaviour
 {
     public enum State 
     {
+        Jiggle,
         Moving,
         Stopped,
         Sliding
@@ -22,6 +23,7 @@ public class BrickGroupStateController : MonoBehaviour
     }
 
     public BrickGroup group;
+    public GlobalPropertiesSO globalProperties;
 
     [ReadOnly]
     public IState Current;
@@ -29,6 +31,7 @@ public class BrickGroupStateController : MonoBehaviour
     private MovingState Moving;
     private StoppedState Stopped;
     private SlidingState Sliding;
+    private JiggleState Jiggle;
 
     private void Awake()
     {
@@ -40,6 +43,7 @@ public class BrickGroupStateController : MonoBehaviour
         Moving = new MovingState(group);
         Stopped = new StoppedState(group);
         Sliding = new SlidingState(group);
+        Jiggle = new JiggleState(group);
     }
 
     public void StartMovement()
@@ -90,6 +94,10 @@ public class BrickGroupStateController : MonoBehaviour
             case State.Sliding:
                 Current = Sliding;
                 break;
+            case State.Jiggle:
+                Current = Jiggle;
+                break;
+
         }
 
         Current.OnEnter();
@@ -105,6 +113,49 @@ public class BrickGroupStateController : MonoBehaviour
         if (Current != null) Current.LateUpdate();
     }
 
+    [System.Serializable]
+    public class JiggleState : IState
+    {
+        public State State { get { return State.Jiggle; } }
+        private BrickGroup group;
+
+        private float duration;
+
+        public JiggleState(BrickGroup group)
+        {
+            this.group = group;
+        }
+
+        public void OnEnter()
+        {
+            duration = group.stateController.globalProperties.BrickJiggleDuration;
+            foreach (var brick in group.Bricks)
+            {
+                brick.Jiggle.StartJiggle();
+            }
+        }
+
+        public void OnExit()
+        {
+            foreach (var brick in group.Bricks)
+            {
+                brick.Jiggle.StopJiggle();
+            }
+        }
+
+        public void Update()
+        {
+            duration -= Time.deltaTime;
+            if (duration <=0)
+            {
+                group.RequestMovement();
+            }
+        }
+
+        public void LateUpdate()
+        {
+        }
+    }
 
     [System.Serializable]
     public class MovingState : IState
