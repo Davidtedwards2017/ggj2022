@@ -20,10 +20,14 @@ public class Brick : MonoBehaviour
 
     public BrickEventChannel BrickCreatedChannel;
     public BrickEventChannel BrickDestroyedChannel;
+    public BrickEventChannel BrickClearedChannel;
+
+    public BrickEventChannel BrickLandedChannel;
 
     bool beingCleared = false;
 
     public SideEvent OnInitFromSide;
+    public BrickEvent OnBrickPositionUpdated;
 
     public void Init(Side side, BrickType type)
     {
@@ -49,12 +53,19 @@ public class Brick : MonoBehaviour
     public void RequestClearEnd()
     {
         group.Remove(this);
+        BrickClearedChannel.Set(this);
         Destroy(gameObject);
     }
 
     public void UpdateCell(Cell cell)
     {
         Side = cell.Side;
+        OnBrickPositionUpdated?.Invoke(this);
+    }
+
+    public void BrickLanded()
+    {
+        BrickLandedChannel.Set(this);
     }
 
     private void OnEnable()

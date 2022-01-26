@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 344500057036097559}
   - component: {fileID: 4113194760470321908}
   - component: {fileID: 4762584579055792904}
+  - component: {fileID: 288064867979923055}
   m_Layer: 7
   m_Name: Brick
   m_TagString: Untagged
@@ -139,11 +140,29 @@ MonoBehaviour:
     type: 2}
   BrickDestroyedChannel: {fileID: 11400000, guid: 0a8e57462aaa0fc48a27bf902b7fa252,
     type: 2}
+  BrickClearedChannel: {fileID: 11400000, guid: 17ed275899a0433439fe045ec6d84af1,
+    type: 2}
+  BrickLandedChannel: {fileID: 11400000, guid: 9ebf2134db1d3ee46baafcbfdcd96666, type: 2}
   OnInitFromSide:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SideEventRouter, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnBrickPositionUpdated:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 288064867979923055}
+        m_TargetAssemblyTypeName: BrickEventChannelAccess, Assembly-CSharp
         m_MethodName: Raise
         m_Mode: 0
         m_Arguments:
@@ -185,6 +204,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Brick, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4762584579055792904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +245,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &288064867979923055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344500057036097558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9c198f5364cc4b45a7985a19c5b089d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Channel: {fileID: 11400000, guid: ab1f4423afbe5474e85911d9b4f10288, type: 2}
 --- !u!1 &344500057894127238
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,6 +497,18 @@ MonoBehaviour:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BrickGroupStateController, Assembly-CSharp
         m_MethodName: StopMovement
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 344500057036097559}
+        m_TargetAssemblyTypeName: Brick, Assembly-CSharp
+        m_MethodName: BrickLanded
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

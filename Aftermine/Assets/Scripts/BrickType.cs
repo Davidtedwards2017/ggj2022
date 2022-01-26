@@ -6,4 +6,5 @@ using UnityEngine;
 public class BrickType : ScriptableObject
 {
     public List<Sprite> sprites;
+    public int CleanValue = 1; 
 }
