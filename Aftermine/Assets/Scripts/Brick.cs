@@ -20,6 +20,9 @@ public class Brick : MonoBehaviour
 
     public BrickEventChannel BrickCreatedChannel;
     public BrickEventChannel BrickDestroyedChannel;
+    public BrickEventChannel BrickClearedChannel;
+
+    public BrickEventChannel BrickLandedChannel;
 
     bool beingCleared = false;
 
@@ -50,6 +53,7 @@ public class Brick : MonoBehaviour
     public void RequestClearEnd()
     {
         group.Remove(this);
+        BrickClearedChannel.Set(this);
         Destroy(gameObject);
     }
 
@@ -57,6 +61,11 @@ public class Brick : MonoBehaviour
     {
         Side = cell.Side;
         OnBrickPositionUpdated?.Invoke(this);
+    }
+
+    public void BrickLanded()
+    {
+        BrickLandedChannel.Set(this);
     }
 
     private void OnEnable()
