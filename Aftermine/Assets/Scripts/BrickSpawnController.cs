@@ -7,6 +7,7 @@ using UnityEngine;
 public class BrickSpawnController : MonoBehaviour
 {
     public Grid Grid;
+    public DifficultyController DifficultyController;
     public GlobalPropertiesSO GlobalProperties;
     public SpawnerGroup UpperSpawnGroup;
     public SpawnerGroup LowerSpawnGroup;
@@ -54,7 +55,7 @@ public class BrickSpawnController : MonoBehaviour
             var upperSpawner = UpperSpawnGroup.Spawners.FirstOrDefault(s => s.Column == col);
             var lowerSpawner = LowerSpawnGroup.Spawners.FirstOrDefault(s => s.Column == col);
 
-            var colSpawnGroup = new ColumnSpawnerGroup(col, GlobalProperties, upperSpawner, lowerSpawner);
+            var colSpawnGroup = new ColumnSpawnerGroup(col, GlobalProperties, upperSpawner, lowerSpawner, DifficultyController);
             ColumnSpawnerGroups.Add(colSpawnGroup);
         }
     }
@@ -76,13 +77,16 @@ public class BrickSpawnController : MonoBehaviour
 
     public IEnumerator Spawn()
     {
-        var spawnerGroup = RequestNextColumnSpawnerGroup();
-        yield return new WaitForSeconds(GlobalProperties.TimeBetweenBrickSpawns);
+        yield return new WaitForSeconds(DifficultyController.current.TimeBetweenSpawns);
 
         if (Spawning)
         {
-            spawnerGroup.SpawnNext(SpawnSide, BrickGroupPrefab, BrickContainer);
-            SwapSpawnSide();
+            for (int i = 0; i < DifficultyController.current.BricksPerSpawn; i++)
+            {
+                var spawnerGroup = RequestNextColumnSpawnerGroup();
+                spawnerGroup.SpawnNext(SpawnSide, BrickGroupPrefab, BrickContainer, DifficultyController.current);
+                SwapSpawnSide();
+            }
         }
     }
 
@@ -136,19 +140,20 @@ public class BrickSpawnController : MonoBehaviour
             int column, 
             GlobalPropertiesSO properties, 
             Spawner upperSpawner, 
-            Spawner lowerSpawner)
+            Spawner lowerSpawner,
+            DifficultyController difficultyController)
         {
             Column = column;
-            randomTypePicker = new BrickTypeFilteredRandom(properties.BrickTypes, 2);
+            randomTypePicker = new BrickTypeFilteredRandom(properties.BrickTypes, 2, difficultyController);
 
             this.upperSpawner = upperSpawner;
             this.lowerSpawner = lowerSpawner;
         }
 
-        public void SpawnNext(Side side, BrickGroup prefab, Transform container)
+        public void SpawnNext(Side side, BrickGroup prefab, Transform container, DifficultySetting difficulty)
         {
             var spawner = side == Side.Upper ? upperSpawner : lowerSpawner;
-            spawner.Spawn(prefab, randomTypePicker.GetNextRandom(), container);
+            spawner.Spawn(prefab, randomTypePicker.GetNextRandom(), container, difficulty);
         }
     }
 

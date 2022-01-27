@@ -6,5 +6,10 @@ using UnityEngine;
 public class BrickType : ScriptableObject
 {
     public List<Sprite> sprites;
-    public int CleanValue = 1; 
+    public int ClearValue = 1; 
+
+    public bool CanSpawn(DifficultySetting difficulty)
+    {
+        return difficulty.BrickTypes.Contains(this);
+    }
 }

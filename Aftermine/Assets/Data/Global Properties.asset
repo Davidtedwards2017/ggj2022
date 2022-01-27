@@ -14,12 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BrickSize: {x: 0.95, y: 1}
   GridSnapDistance: 0.7
-  BrickFallingSpeed: 10
-  TimeBetweenBrickSpawns: 2
-  BrickJiggleDuration: 2
   BrickTypes:
   - {fileID: 11400000, guid: 57d3e78e509b6ba4abd0ec97d3a3d8af, type: 2}
   - {fileID: 11400000, guid: fda47761a8871bd4a9e743b9612c02c2, type: 2}
+  - {fileID: 11400000, guid: 4ecd8e2fa922fb043881692a92b6ea17, type: 2}
   character:
     MovementDuration: 0.15
     MovementJumpHeight: 1.5

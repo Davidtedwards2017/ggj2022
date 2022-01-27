@@ -13,7 +13,7 @@ public class Brick : MonoBehaviour
     public BrickType type;
     public GridObject gridObject;
     public BrickJiggle Jiggle;
-
+    public DifficultySetting difficulty;
 
     public BrickEvent OnRequestBrickInit;
     public BrickTypeEvent OnSetBrickType;
@@ -29,10 +29,11 @@ public class Brick : MonoBehaviour
     public SideEvent OnInitFromSide;
     public BrickEvent OnBrickPositionUpdated;
 
-    public void Init(Side side, BrickType type)
+    public void Init(Side side, BrickType type, DifficultySetting difficulty)
     {
         Side = side;
         this.type = type;
+        this.difficulty = difficulty;
         OnRequestBrickInit?.Invoke(this);
         OnSetBrickType?.Invoke(this.type);
 
