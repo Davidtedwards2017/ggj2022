@@ -17,3 +17,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 48b3a5870cde7c949b03203d047da277, type: 3}
   - {fileID: 21300000, guid: 671898567052ff9449a1bd00546a08d2, type: 3}
   - {fileID: 21300000, guid: fa19d62e2bf8c58418c7260334bada1b, type: 3}
+  ClearValue: 1
+  ClearEffectPrefab: {fileID: 4470225310184773754, guid: ff8fc7e904fa37d4e949bfbb247cfd0c,
+    type: 3}

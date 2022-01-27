@@ -49,6 +49,7 @@ MonoBehaviour:
   OnCreatedChannel: {fileID: 11400000, guid: c2006363f15f7be498b244870460f6c4, type: 2}
   OnDestroyedChannel: {fileID: 11400000, guid: 0346f9574aac4a14c9b500257373f64d, type: 2}
   OnStopped: {fileID: 0}
+  difficulty: {fileID: 0}
   Bricks: []
   Side: 0
   stateController: {fileID: 707079775232100853}
