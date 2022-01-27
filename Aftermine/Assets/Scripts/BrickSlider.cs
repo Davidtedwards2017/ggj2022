@@ -21,6 +21,8 @@ public class BrickSlider : MonoBehaviour
 
     public BrickEvent OnCollisionWithFallingBrick;
     public BrickEvent OnRequestStopSlide;
+
+    public BrickEvent OnStartSlide;
     public BrickEvent OnStopSlide;
 
     [ReadOnly]
@@ -28,6 +30,7 @@ public class BrickSlider : MonoBehaviour
 
     public void StartSliding(SlideGroup slideGroup)
     {
+        OnStartSlide?.Invoke(Brick);
         this.Direction = slideGroup.Direction;
         this.slideGroup = slideGroup;
         this.Distance = slideGroup.Distance;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Brick : MonoBehaviour
 {
@@ -21,8 +22,11 @@ public class Brick : MonoBehaviour
     public BrickEventChannel BrickCreatedChannel;
     public BrickEventChannel BrickDestroyedChannel;
     public BrickEventChannel BrickClearedChannel;
+    public BrickEvent OnBrickCleared;
 
     public BrickEventChannel BrickLandedChannel;
+
+    public UnityEvent OnLand;
 
     bool beingCleared = false;
 
@@ -54,6 +58,7 @@ public class Brick : MonoBehaviour
     public void RequestClearEnd()
     {
         group.Remove(this);
+        OnBrickCleared?.Invoke(this);
         BrickClearedChannel.Set(this);
         Destroy(gameObject);
     }
@@ -66,6 +71,7 @@ public class Brick : MonoBehaviour
 
     public void BrickLanded()
     {
+        OnLand?.Invoke();
         BrickLandedChannel.Set(this);
     }
 

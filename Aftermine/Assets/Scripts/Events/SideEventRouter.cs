@@ -8,6 +8,10 @@ public class SideEventRouter : MonoBehaviour
     public UnityEvent OnUpperSide;
     public UnityEvent OnLowerSide;
 
+    public void Raise(Brick brick)
+    {
+        Raise(brick.Side);
+    }
 
     public void Raise(Side side)
     {

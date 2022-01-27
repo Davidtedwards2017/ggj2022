@@ -6,7 +6,9 @@ using UnityEngine;
 public class BrickType : ScriptableObject
 {
     public List<Sprite> sprites;
-    public int ClearValue = 1; 
+    public int ClearValue = 1;
+
+    public GameObject ClearEffectPrefab;
 
     public bool CanSpawn(DifficultySetting difficulty)
     {
