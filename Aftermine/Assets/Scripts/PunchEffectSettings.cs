@@ -6,9 +6,11 @@ using DG.Tweening;
 [CreateAssetMenu(menuName = "GGJ/Punch Effect Settings")]
 public class PunchEffectSettings : ScriptableObject
 {
-    public Vector3 punch;
-    public float duration = 1;
-    
+    public Vector3 punch_min;
+    public Vector3 punch_max;
+    public float duration_min = 1;
+    public float duration_max = 1;
+
     [Range(1, 50)]
     public int vibro = 10;
 
