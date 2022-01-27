@@ -27,10 +27,10 @@ public class Spawner : MonoBehaviour
         gameObject.name = string.Format("Spawner ({0},{1})", row, column);
     }
 
-    public void Spawn(BrickGroup prefab, BrickType type, Transform parent)
+    public void Spawn(BrickGroup prefab, BrickType type, Transform parent, DifficultySetting difficulty)
     {
         var brickGroup = Instantiate(prefab, transform.position, Quaternion.identity, parent);
-        brickGroup.Init(Side, type);
+        brickGroup.Init(Side, type, difficulty);
     }
 
 }

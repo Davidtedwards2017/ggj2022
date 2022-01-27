@@ -9,20 +9,22 @@ public class BrickGroup : MonoBehaviour
     public BrickGroupEventChannel OnDestroyedChannel;
     public BrickGroupEventChannel OnStopped;
 
+    public DifficultySetting difficulty;
     public List<Brick> Bricks;
     public Side Side;
 
     public BrickGroupStateController stateController;
 
-    public void Init(Side side, BrickType type)
+    public void Init(Side side, BrickType type, DifficultySetting difficulty)
     {
+        this.difficulty = difficulty;
         Side = side;
 
         var bricks = GetComponentsInChildren<Brick>();
         foreach (var brick in bricks)
         {
             Add(brick);
-            brick.Init(side, type);
+            brick.Init(side, type, difficulty);
         }
 
         stateController.ChangeState(BrickGroupStateController.State.Jiggle);

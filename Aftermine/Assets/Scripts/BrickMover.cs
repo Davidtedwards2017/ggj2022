@@ -26,7 +26,7 @@ public class BrickMover : MonoBehaviour
     {
         var direction = globalProperties.GetBrickMovementDirection(Side);
 
-        Velocity = direction.normalized * globalProperties.BrickFallingSpeed * Time.deltaTime;
+        Velocity = direction.normalized * Brick.difficulty.BrickFallSpeed * Time.deltaTime;
         Brick.transform.Translate(Velocity);
         Trace(direction);
     }

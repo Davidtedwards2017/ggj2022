@@ -128,7 +128,7 @@ public class BrickGroupStateController : MonoBehaviour
 
         public void OnEnter()
         {
-            duration = group.stateController.globalProperties.BrickJiggleDuration;
+            duration = group.difficulty.BrickJiggleDuration;
             foreach (var brick in group.Bricks)
             {
                 brick.Jiggle.StartJiggle();

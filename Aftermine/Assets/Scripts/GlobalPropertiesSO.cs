@@ -7,10 +7,6 @@ public class GlobalPropertiesSO : ScriptableObject
 {
     public Vector2 BrickSize = Vector2.one;
     public float GridSnapDistance = 0.7f;
-    public float BrickFallingSpeed = 1;
-    public float TimeBetweenBrickSpawns = 1.0f;
-
-    public float BrickJiggleDuration = 1.0f;
 
     public List<BrickType> BrickTypes;
 

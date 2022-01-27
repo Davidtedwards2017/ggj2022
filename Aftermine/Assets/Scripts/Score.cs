@@ -24,7 +24,7 @@ public class Score : MonoBehaviour
     {
         if (brick == null) return;
 
-        targetScore += brick.type.CleanValue;
+        targetScore += brick.type.ClearValue;
         DOTween.To(()=> score, s => score = s, targetScore, incrementDuration)
             .OnUpdate(() => UpdateScoreText());
     }
