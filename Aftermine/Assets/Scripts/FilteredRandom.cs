@@ -21,7 +21,7 @@ public class FilteredRandom<T>
         _History = new T[historyLength];
     }
 
-    public List<T> GetNextRandom(int count)
+    public virtual List<T> GetNextRandom(int count)
     {
         var picked = new List<T>();
         while (count > 0)
@@ -33,7 +33,7 @@ public class FilteredRandom<T>
         return picked;
     }
 
-    public T GetNextRandom()
+    public virtual T GetNextRandom()
     {
         T selected;
         var attempts = MaxAttempts;
