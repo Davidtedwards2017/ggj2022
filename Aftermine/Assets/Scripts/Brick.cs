@@ -1,3 +1,4 @@
+using gamedev.utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,7 +29,8 @@ public class Brick : MonoBehaviour
 
     public UnityEvent OnLand;
 
-    bool beingCleared = false;
+    [ReadOnly]
+    public bool beingCleared = false;
 
     public SideEvent OnInitFromSide;
     public BrickEvent OnBrickPositionUpdated;

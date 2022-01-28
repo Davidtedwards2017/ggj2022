@@ -7,6 +7,7 @@ using UnityEngine;
 public class BrickSpawnController : MonoBehaviour
 {
     public Grid Grid;
+    public BrickCollection brickCollection;
     public DifficultyController DifficultyController;
     public GlobalPropertiesSO GlobalProperties;
     public SpawnerGroup UpperSpawnGroup;
@@ -55,7 +56,8 @@ public class BrickSpawnController : MonoBehaviour
             var upperSpawner = UpperSpawnGroup.Spawners.FirstOrDefault(s => s.Column == col);
             var lowerSpawner = LowerSpawnGroup.Spawners.FirstOrDefault(s => s.Column == col);
 
-            var colSpawnGroup = new ColumnSpawnerGroup(col, GlobalProperties, upperSpawner, lowerSpawner, DifficultyController);
+            var colSpawnGroup = new ColumnSpawnerGroup(col, GlobalProperties, upperSpawner, lowerSpawner, 
+                DifficultyController, brickCollection);
             ColumnSpawnerGroups.Add(colSpawnGroup);
         }
     }
@@ -141,10 +143,12 @@ public class BrickSpawnController : MonoBehaviour
             GlobalPropertiesSO properties, 
             Spawner upperSpawner, 
             Spawner lowerSpawner,
-            DifficultyController difficultyController)
+            DifficultyController difficultyController,
+            BrickCollection brickCollection)
         {
             Column = column;
-            randomTypePicker = new BrickTypeFilteredRandom(properties.BrickTypes, 2, difficultyController);
+            randomTypePicker = new BrickTypeFilteredRandom(properties.BrickTypes, 2, 
+                difficultyController, brickCollection, column);
 
             this.upperSpawner = upperSpawner;
             this.lowerSpawner = lowerSpawner;

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e95597540292397429c382961e87282d, type: 3}
   m_Name: Brick Shake On Land Effect (position)
   m_EditorClassIdentifier: 
-  punch_min: {x: 0, y: 0, z: 0}
-  punch_max: {x: 3, y: 3, z: 2}
+  punch_min: {x: -0.1, y: -0.05, z: 0}
+  punch_max: {x: 0.1, y: 0.05, z: 0}
   duration_min: 1
   duration_max: 1
-  vibro: 10
-  elasticity: 1
+  vibro: 5
+  elasticity: 0.349
   ease: 25

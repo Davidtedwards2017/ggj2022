@@ -1,4 +1,5 @@
 using gamedev.utilities;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine;
 public class LineClearSequence : MonoBehaviour
 {
     [ReadOnly]
-    private List<Brick> bricks;
+    public List<Brick> bricks;
 
     public float Duration = 0.5f;
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class BrickCollection : MonoBehaviour
 {
@@ -22,6 +23,11 @@ public class BrickCollection : MonoBehaviour
             Bricks.Add(brick);
         }
     }
+
+    public List<BrickType> GetBrickTypesInColumn(int column)
+    {
+        return GetBricksInColumn(column).Select(b => b.type).Distinct().ToList();
+    } 
 
     public void Remove(Brick brick)
     {

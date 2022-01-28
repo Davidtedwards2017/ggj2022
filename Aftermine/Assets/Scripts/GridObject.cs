@@ -33,6 +33,7 @@ public class GridObject : MonoBehaviour
     public void Refresh()
     {
         var _Cell = GetClosestCell();
+        if (_Cell == null) return;
         if (Cell != _Cell)
         {
             Cell = _Cell;
