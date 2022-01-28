@@ -29,7 +29,7 @@ public class CharacterGroundCheck : MonoBehaviour
         RaycastHit2D[] hits = Physics2D.RaycastAll(
             origin,
             direction,
-            0.2f);
+            0.1f);
 
         foreach (var hit in hits)
         {

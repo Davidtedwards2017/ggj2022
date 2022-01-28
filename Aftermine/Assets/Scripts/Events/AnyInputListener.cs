@@ -9,6 +9,6 @@ public class AnyInputListener : MonoBehaviour
 
     public void OnAny()
     {
-        OnAnyInput?.Invoke();
+         OnAnyInput?.Invoke();
     }
 }
