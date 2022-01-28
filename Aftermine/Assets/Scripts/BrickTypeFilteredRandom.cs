@@ -9,6 +9,7 @@ public class BrickTypeFilteredRandom : FilteredRandom<BrickType>
     public BrickTypeFilteredRandom(IEnumerable<BrickType> collection, int historyLength, DifficultyController difficultyController) 
         : base (collection, historyLength)
     {
+        this.AllowInvalidAfterExaustedAttempts = false;
         this.PreventPattern = false;
         this.difficultyController = difficultyController;
     }

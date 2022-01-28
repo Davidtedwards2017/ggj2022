@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using gamedev.utilities;
+using System;
 
 public class DifficultyController : MonoBehaviour
 {
@@ -30,11 +31,11 @@ public class DifficultyController : MonoBehaviour
 
         brickClearCount++;
 
-        if (difficulty > difficultyLevels.Count) return;
+        if (difficulty + 1 >= difficultyLevels.Count) return;
+
 
         var nextDifficulty = difficultyLevels[difficulty + 1];
         if (nextDifficulty == null) return;
-
 
         if (brickClearCount >= nextDifficulty.BricksCleared)
         {
