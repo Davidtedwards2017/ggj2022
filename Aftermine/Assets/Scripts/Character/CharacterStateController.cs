@@ -27,8 +27,11 @@ public class CharacterStateController : MonoBehaviour
     public CharacterPushingState Pushing = new CharacterPushingState();
     public CharacterSquishState Squish = new CharacterSquishState();
 
+    private bool enabled = false;
+
     private void Awake()
     {
+        Current = null;
         Init();
     }
 
@@ -42,14 +45,26 @@ public class CharacterStateController : MonoBehaviour
         Squish.Init(this);
     }
 
+    public void SetEnabled(bool enabled)
+    {
+        this.enabled = enabled;
+    }
+
+    public bool IsIdle()
+    {
+        return Current == Idle;
+    }
+
     // Update is called once per frame
     private void Update()
     {
+        if (!enabled) return;
         if (Current != null) Current.Update();
     }
 
     private void LateUpdate()
     {
+        if (!enabled) return;
         if (Current != null) Current.LateUpdate();
     }
 
@@ -86,6 +101,7 @@ public class CharacterStateController : MonoBehaviour
 
     public void ChangeState(CharacterState state)
     {
+        if (!enabled) return;
         if (Current != null && Current.State == state) return;
 
         if (Current != null) Current.OnExit();

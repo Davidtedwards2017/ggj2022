@@ -21,8 +21,8 @@ MonoBehaviour:
   character:
     MovementDuration: 0.15
     MovementJumpHeight: 1.5
-    FloorPositionOffset: 0.2
-    BrickPositionOffset: 0
+    FloorPositionOffset: 1
+    BrickPositionOffset: 1
     FallSpeed: 10
   prefabs:
     LineClearSequence: {fileID: 7974343660305207133, guid: 6387ad5a6a9e6aa4195899ca98d01217,

@@ -12,16 +12,10 @@ public class PlayerController : MonoBehaviour
 
     public bool EnableInput = true;
 
-    // Start is called before the first frame update
-    void Start()
+
+    public void Init()
     {
         controller.Init();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void SetInputEnabled(bool enabled)

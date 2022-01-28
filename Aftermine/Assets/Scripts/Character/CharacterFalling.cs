@@ -20,12 +20,13 @@ public class CharacterFalling : MonoBehaviour
     {
         var direction = globalProperties.GetBrickMovementDirection(controller.side);
         Velocity = direction.normalized * globalProperties.character.FallSpeed * Time.deltaTime;
-        root.transform.Translate(Velocity);
-
-        Trace(direction);
+        if (Trace(direction))
+        {
+            root.transform.Translate(Velocity);
+        }
     }
 
-    private void Trace(Vector2 direction)
+    private bool Trace(Vector2 direction)
     {
         var origin = root.position +
             (new Vector3(direction.x, direction.y, 0) * (globalProperties.BrickSize.y / 2));
@@ -33,7 +34,7 @@ public class CharacterFalling : MonoBehaviour
         RaycastHit2D[] hits = Physics2D.RaycastAll(
             origin,
             direction,
-            0.2f);
+            Velocity.magnitude);
 
         foreach (var hit in hits)
         {
@@ -42,13 +43,16 @@ public class CharacterFalling : MonoBehaviour
             if (brick != null)
             {
                 OnRequestStopMovement?.Invoke();
-                return;
+                return false;
             }
 
             if (hit.collider.tag == "Floor")
             {
                 OnRequestStopMovement?.Invoke();
+                return false;
             }
         }
+
+        return true;
     }
 }
