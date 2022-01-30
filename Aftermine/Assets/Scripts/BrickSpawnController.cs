@@ -13,6 +13,7 @@ public class BrickSpawnController : MonoBehaviour
     public SpawnerGroup UpperSpawnGroup;
     public SpawnerGroup LowerSpawnGroup;
     public List<ColumnSpawnerGroup> ColumnSpawnerGroups;
+    public AudioSource audioEmit;
 
     public Transform BrickContainer;
     public Side SpawnSide;
@@ -26,6 +27,7 @@ public class BrickSpawnController : MonoBehaviour
 
     private void OnEnable()
     {
+
         Rebuild();
     }
 
@@ -134,7 +136,6 @@ public class BrickSpawnController : MonoBehaviour
         private BrickTypeFilteredRandom randomTypePicker;
         private Spawner upperSpawner;
         private Spawner lowerSpawner;
-        
         [ReadOnly]
         public int Column;
 
@@ -158,6 +159,7 @@ public class BrickSpawnController : MonoBehaviour
         {
             var spawner = side == Side.Upper ? upperSpawner : lowerSpawner;
             spawner.Spawn(prefab, randomTypePicker.GetNextRandom(), container, difficulty);
+
         }
     }
 

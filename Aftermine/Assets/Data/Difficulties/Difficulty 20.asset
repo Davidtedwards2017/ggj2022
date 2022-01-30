@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Difficulty 20
   m_EditorClassIdentifier: 
   BricksCleared: 20
-  TimeBetweenSpawns: 1.5
+  TimeBetweenSpawns: 1.35
   BricksPerSpawn: 1
   BrickFallSpeed: 15
   BrickJiggleDuration: 1.8

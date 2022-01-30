@@ -19,7 +19,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fda47761a8871bd4a9e743b9612c02c2, type: 2}
   - {fileID: 11400000, guid: 4ecd8e2fa922fb043881692a92b6ea17, type: 2}
   character:
-    MovementDuration: 0.15
+    MovementDuration: 0.1
     MovementJumpHeight: 1.5
     FloorPositionOffset: 1
     BrickPositionOffset: 1
